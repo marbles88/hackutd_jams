@@ -1,71 +1,54 @@
-#include <iostream>
 #include <fstream>
 #include <sstream>
-#include <vector>
-#include <string>
+#include "MortgageRecord.cpp"
 
 using namespace std;
 
-// A simple structure to hold the information for each record
-struct MortgageRecord {
-    int id;
-    double grossMonthlyIncome;
-    double creditCardPayment;
-    double carPayment;
-    double studentLoanPayments;
-    double appraisedValue;
-    double downPayment;
-    double loanAmount;
-    double monthlyMortgagePayment;
-    int creditScore;
-};
+vector<MortgageRecord> readMortgageRecords(const string& fileName);
 
 int main() {
-    string fileName = "/data/HackUTD-2023-HomeBuyerInfo.csv"; // Replace with your CSV file name
+    std::string fileName = "data/HackUTD-2023-HomeBuyerInfo.csv";
+    std::vector<MortgageRecord> mortgageRecords = readMortgageRecords(fileName);
+
+    // Now you can work with your mortgageRecords vector.
+    // ...
+
+    return 0;
+}
+
+
+vector<MortgageRecord> readMortgageRecords(const string& fileName) {
+    vector<MortgageRecord> records;
     ifstream file(fileName);
 
-    // Check if we've opened the file (as we might not have it at our disposal)
-    if (!file.is_open()) {
-        cerr << "Could not open the file - '" << fileName << "'" << endl;
-        return EXIT_FAILURE;
-    }
-
     string line;
-    getline(file, line); // Skip the header line
+    // Skip the header line
+    getline(file, line);
 
-    // Read data, line by line
     while (getline(file, line)) {
-        stringstream lineStream(line);
-        string cell;
-        MortgageRecord record;
+        istringstream s(line);
+        string field;
+        vector<string> fields;
 
-        // Read each element from the row
-        getline(lineStream, cell, ',');
-        record.id = stoi(cell);
-        getline(lineStream, cell, ',');
-        record.grossMonthlyIncome = stod(cell);
-        getline(lineStream, cell, ',');
-        record.creditCardPayment = stod(cell);
-        getline(lineStream, cell, ',');
-        record.carPayment = stod(cell);
-        getline(lineStream, cell, ',');
-        record.studentLoanPayments = stod(cell);
-        getline(lineStream, cell, ',');
-        record.appraisedValue = stod(cell);
-        getline(lineStream, cell, ',');
-        record.downPayment = stod(cell);
-        getline(lineStream, cell, ',');
-        record.loanAmount = stod(cell);
-        getline(lineStream, cell, ',');
-        record.monthlyMortgagePayment = stod(cell);
-        getline(lineStream, cell);
-        record.creditScore = stoi(cell);
+        while (getline(s, field, ',')) {
+            fields.push_back(field);
+        }
 
-        // Process the record
-        // For now, let's just print it
-        cout << "Record ID: " << record.id << ", Monthly Mortgage Payment: " << record.monthlyMortgagePayment << endl;
+        if (fields.size() == 10) {  // Make sure we have the right number of fields
+            MortgageRecord record(
+                stoi(fields[0]),
+                stod(fields[1]),
+                stod(fields[2]),
+                stod(fields[3]),
+                stod(fields[4]),
+                stod(fields[5]),
+                stod(fields[6]),
+                stod(fields[7]),
+                stod(fields[8]),
+                stoi(fields[9])
+            );
+            records.push_back(record);
+        }
     }
-
-    file.close(); // Always close the file when you're done with it
-    return 0;
+    return records;
 }
