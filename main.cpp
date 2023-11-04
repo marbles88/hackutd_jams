@@ -21,7 +21,7 @@ struct MortgageRecord {
 };
 
 int main() {
-    string fileName = "mortgages.csv"; // Replace with your CSV file name
+    string fileName = "/data/HackUTD-2023-HomeBuyerInfo.csv"; // Replace with your CSV file name
     ifstream file(fileName);
 
     // Check if we've opened the file (as we might not have it at our disposal)
