@@ -1,44 +1,34 @@
-// JavaScript code goes here
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the default form submission
+document.addEventListener('DOMContentLoaded', (event) => {
+  const loginForm = document.getElementById('loginForm');
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const rememberMe = document.getElementById('rememberMe').checked;
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
 
-  console.log('Username:', username);
-  console.log('Password:', password);
-  console.log('Remember Me:', rememberMe);
+    // Retrieve values from form
+    const id = document.getElementById('ID').value;
+    const grossMonthlyIncome = document.getElementById('GrossMonthlyIncome').value;
+    const creditCardPayment = document.getElementById('CreditCardPayment').value;
+    const studentLoanPayment = document.getElementById('StudentLoanPayment').value;
+    const carPayment = document.getElementById('CarPayment').value;
+    const appraisedValue = document.getElementById('AppraisedValue').value;
+    const downPayment = document.getElementById('DownPayment').value;
+    const loanAmount = document.getElementById('LoanAmount').value;
+    const monthlyMortgagePayment = document.getElementById('MonthlyMortgagePayment').value;
+    const creditScore = document.getElementById('CreditScore').value;
 
-  // You can add additional code here to handle the form values,
-  // such as sending them to a server or updating the UI.
+    // Log the values to the console (or you can store them as needed)
+    console.log('ID:', id);
+    console.log('Gross Monthly Income:', grossMonthlyIncome);
+    console.log('Credit Card Payment:', creditCardPayment);
+    console.log('Student Loan Payment:', studentLoanPayment);
+    console.log('Car Payment:', carPayment);
+    console.log('Appraised Value:', appraisedValue);
+    console.log('Down Payment:', downPayment);
+    console.log('Loan Amount:', loanAmount);
+    console.log('Monthly Mortgage Payment:', monthlyMortgagePayment);
+    console.log('Credit Score:', creditScore);
+
+    // If you want to store the values locally in the browser:
+    // localStorage.setItem('formData', JSON.stringify({id, grossMonthlyIncome, creditCardPayment, studentLoanPayment, carPayment, appraisedValue, downPayment, loanAmount, monthlyMortgagePayment, creditScore}));
+  });
 });
-
-// document.getElementById('financialForm').addEventListener('submit', function(event) {
-//   event.preventDefault(); // Prevents the default form submission action
-
-//   // Capture the form values
-//   var id = document.getElementById('id').value;
-//   var grossIncome = parseFloat(document.getElementById('grossIncome').value);
-//   var carPayment = parseFloat(document.getElementById('carPayment').value);
-//   var creditCardPayment = parseFloat(document.getElementById('creditCardPayment').value);
-//   var studentLoanPayment = parseFloat(document.getElementById('studentLoanPayment').value);
-//   var homeValue = parseFloat(document.getElementById('homeValue').value);
-//   var mortgagePayment = parseFloat(document.getElementById('mortgagePayment').value);
-//   var downPayment = parseFloat(document.getElementById('downPayment').value);
-//   var creditScore = parseInt(document.getElementById('creditScore').value);
-
-//   // For demonstration purposes, let's log the values to the console
-//   console.log('ID:', id);
-//   console.log('Gross Monthly Income:', grossIncome);
-//   console.log('Monthly Car Payment:', carPayment);
-//   console.log('Monthly Credit Card Payment:', creditCardPayment);
-//   console.log('Student Loan Payment:', studentLoanPayment);
-//   console.log('Home Appraised Value:', homeValue);
-//   console.log('Estimated Monthly Mortgage Payment:', mortgagePayment);
-//   console.log('Down Payment Amount:', downPayment);
-//   console.log('Credit Score:', creditScore);
-
-//   // At this point, you can do something with these values,
-//   // like pass them to a function that will render the graph.
-// });
